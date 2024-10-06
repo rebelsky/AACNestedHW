@@ -179,15 +179,15 @@ public class TestAACMappings {
     AACMappings mappings = 
         new AACMappings(configFile("one uno\ntwo dos\nthree tres"));
     assertEquals("", mappings.select("one"), "selecting one");
-    assertEquals("one", mappings.getCategory(), "selected one");
+    assertEquals("uno", mappings.getCategory(), "selected one");
 
     mappings.reset();
     assertEquals("", mappings.select("two"), "selecting two");
-    assertEquals("two", mappings.getCategory(), "selected two");
+    assertEquals("dos", mappings.getCategory(), "selected two");
 
     mappings.reset();
     assertEquals("", mappings.select("three"), "selecting three");
-    assertEquals("three", mappings.getCategory(), "selected three");
+    assertEquals("tres", mappings.getCategory(), "selected three");
   } // testGetCategoryA()
 
   /**
@@ -201,15 +201,15 @@ public class TestAACMappings {
   public void testGetCategoryB() throws IOException {
     AACMappings mappings = new AACMappings(configFile(TEST_CONFIG));
     assertEquals("", mappings.select("one"), "selecting one");
-    assertEquals("one", mappings.getCategory(), "selected one");
+    assertEquals("fruit", mappings.getCategory(), "selected one");
 
     mappings.reset();
     assertEquals("", mappings.select("two"), "selecting two");
-    assertEquals("two", mappings.getCategory(), "selected two");
+    assertEquals("clothes", mappings.getCategory(), "selected two");
 
     mappings.reset();
     assertEquals("", mappings.select("three"), "selecting three");
-    assertEquals("three", mappings.getCategory(), "selected three");
+    assertEquals("miscellaneous", mappings.getCategory(), "selected three");
   } // testGetCategoryB()
 
   /**
@@ -248,17 +248,17 @@ public class TestAACMappings {
         "the third top-level category");
 
     assertEquals("", mappings.select("uno"), "selecting uno");
-    assertEquals(new String[] {}, mappings.getImageLocs(),
+    assertArrayEquals(new String[] {}, mappings.getImageLocs(),
         "nothing in category uno");
 
     mappings.reset();
     assertEquals("", mappings.select("dos"), "selecting dos");
-    assertEquals(new String[] {}, mappings.getImageLocs(), 
+    assertArrayEquals(new String[] {}, mappings.getImageLocs(), 
         "nothing in category dos");
 
     mappings.reset();
     assertEquals("", mappings.select("tres"), "selecting tres");
-    assertEquals(new String[] {}, mappings.getImageLocs(),
+    assertArrayEquals(new String[] {}, mappings.getImageLocs(),
         "nothing in category tres");
 
     mappings.reset();
@@ -428,11 +428,11 @@ public class TestAACMappings {
     AACMappings mappings = new AACMappings(configFile(""));
 
     mappings.addItem("p", "pizza toppings");
-    assertEquals(new String[] {"pizza toppings"}, mappings.getImageLocs(),
+    assertArrayEquals(new String[] {"p"}, mappings.getImageLocs(),
         "After adding our first category");
 
     assertEquals("", mappings.select("p"), "selecting p");
-    assertEquals(new String[] {}, mappings.getImageLocs(),
+    assertArrayEquals(new String[] {}, mappings.getImageLocs(),
         "Nothing in category p (at least not yet)");
 
     mappings.addItem("o", "onion");
@@ -447,7 +447,7 @@ public class TestAACMappings {
     mappings.addItem("q", "words that start with q");
     assertEquals(2, mappings.getImageLocs().length, "two categories");
     assertEquals("", mappings.select("q"));
-    assertEquals(new String[] {}, mappings.getImageLocs(),
+    assertArrayEquals(new String[] {}, mappings.getImageLocs(),
         "Nothing in category q (at least not yet)");
     mappings.addItem("image of silence", "quiet");
     mappings.addItem("image of a small fruit", "quince");
